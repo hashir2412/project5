@@ -81,8 +81,12 @@ function addToFavorite($business_id)
         );
         $dbh->beginTransaction();
         $cat = "";
-        foreach ($copy->categories as $key) {
-            $cat = $cat . $key->title;
+        for ($i = 0; $i <  count($copy->categories); $i++) {
+            if ($i == count($copy->categories) - 1) {
+                $cat = $cat . $copy->categories[$i]->title;
+            } else {
+                $cat = $cat . $copy->categories[$i]->title . ', ';
+            }
             # code...
         }
         $dbh->exec('Insert into favorites(id, name, image_url, yelp_page_url, categories, price, rating, address, phone) 
